@@ -9,7 +9,7 @@ export default props => {
   const [lastLogOn, setLastLogOn] = useState(props.lastLogOn);
   const { HeaderPrimary, Secondary, Tertiary } = styles;
   return (
-    <>
+    <View>
       <LinearGradient
         colors={["#cc34eb", "#eb3474", "#eb3474"]}
         style={{ width: "100%", height: "100%" }}
@@ -27,7 +27,7 @@ export default props => {
           />
         </View>
       </LinearGradient>
-    </>
+    </View>
   );
 };
 

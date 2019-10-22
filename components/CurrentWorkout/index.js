@@ -1,34 +1,54 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, Modal } from "react-native";
+import { Text } from "react-native";
+import { connect } from "react-redux";
 import { LinearGradient } from "expo-linear-gradient";
 import styles from "../styles";
-import Icon from "react-native-vector-icons/EvilIcons";
 import Header from "./Header";
+import AddWorkout from "./addAWorkout";
+import MyModal from "../Modal";
+import toggleModalActions from "../../redux/actions/actions/";
 
-export default class currentWorkouts extends Component {
-  render() {
-    return (
-      <LinearGradient
-        style={[styles.containerBase]}
-        colors={["#4b6cb7", "#182848"]}
-      >
-        <Header style={{ width: "111%" }}>
-          <Text style={[styles.typebase, styles.marTop5]}>Current Workout</Text>
-        </Header>
+const mapStateToProps = state => {
+  return {
+    currentWorkouts: state.currentWorkouts,
+    visible: state.UI.visible
+  };
+};
 
-        <View style={styles.plus}>
-          <Text style={[, styles.typebase, styles.Secondary]}>
-            add a new workout
-          </Text>
-          <TouchableOpacity>
-            <Icon
-              name="plus"
-              size={100}
-              style={{ color: "white", marginTop: "10%" }}
-            ></Icon>
-          </TouchableOpacity>
-        </View>
-      </LinearGradient>
-    );
+const mapActionsToProps = dispatch => ({
+  toggleModal() {
+    //dispatch an action
+    dispatch(toggleModalActions());
   }
-}
+});
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps
+)(
+  class currentWorkouts extends Component {
+    constructor(props) {
+      super(props);
+    }
+    render() {
+      return (
+        <LinearGradient
+          style={[styles.containerBase]}
+          colors={["#4b6cb7", "#182848"]}
+        >
+          <MyModal
+            toggleModal={this.props.toggleModal}
+            visible={this.props.visible}
+          ></MyModal>
+
+          <Header style={{ width: "111%" }}>
+            <Text style={[styles.typebase, styles.marTop5]}>
+              Current Workout
+            </Text>
+          </Header>
+          <AddWorkout toggleModal={this.props.toggleModal}></AddWorkout>
+        </LinearGradient>
+      );
+    }
+  }
+);

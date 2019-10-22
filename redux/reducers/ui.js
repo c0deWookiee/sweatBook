@@ -1,7 +1,7 @@
-export default (state = { modal: false }, { type }) => {
-  switch (type) {
+export default (state = { visible: false }, action) => {
+  switch (action.type) {
     case "TOGGLE_MODAL":
-      return { ...state, modal: !state.modal };
+      return { ...state, visible: !state.visible };
     default:
       return state;
   }

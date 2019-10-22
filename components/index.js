@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { Text, View, Button } from "react-native";
+import TabView, { ScrollableTabBar } from "react-native-scrollable-tab-view";
+//myOwnStuffHere
 import CurrentWorkouts from "./CurrentWorkout";
 import Welcome from "./welcome";
-import TabView, { ScrollableTabBar } from "react-native-scrollable-tab-view";
 
 export class index extends Component {
   constructor(props) {
@@ -21,16 +22,18 @@ export class index extends Component {
         splash={this.handleSplash}
       ></Welcome>
     ) : (
-      <TabView
-        initialPage={0}
-        renderTabBar={() => <ScrollableTabBar></ScrollableTabBar>}
-        tabBarPosition="bottom"
-      >
-        <View tabLabel="2">
-          <Button title="SUUUUUUUPER LOOOONG TITLE"></Button>
-        </View>
-        <CurrentWorkouts tabLabel="1"></CurrentWorkouts>
-      </TabView>
+      <>
+        <TabView
+          initialPage={0}
+          renderTabBar={() => <ScrollableTabBar></ScrollableTabBar>}
+          tabBarPosition="bottom"
+        >
+          <View tabLabel="2">
+            <Button title="SUUUUUUUPER LOOOONG TITLE"></Button>
+          </View>
+          <CurrentWorkouts tabLabel="1"></CurrentWorkouts>
+        </TabView>
+      </>
     );
   }
 }
